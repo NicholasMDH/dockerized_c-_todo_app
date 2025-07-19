@@ -1,0 +1,43 @@
+# my-todo-app-dockerized/docker-compose.yml
+version: '3.8'
+
+services:
+  # SQL Server Database Service
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_tododb
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "P@ssword1"
+    ports:
+      - "1433:1433" # Map host port 1433 to container port 1433 for external access (e.g., Azure Data Studio)
+    volumes:
+      - sqlserver_data:/var/opt/mssql # Persist database data
+    restart: always
+    healthcheck: # Check if SQL Server is ready
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P P@ssword1 -C -Q 'SELECT 1;'"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 30s # Give it time to start initially
+
+  # ASP.NET Core API Service
+  api:
+    build:
+      context: ./MyToDoAPI # Path to your ASP.NET Core project directory
+      dockerfile: Dockerfile # Name of the Dockerfile within that directory
+    container_name: todoapi_app
+    ports:
+      - "8080:80" # Map host port 8080 to container port 80 (where ASP.NET Core listens by default)
+    depends_on:
+      db:
+        condition: service_healthy # Wait for the DB to be healthy
+    environment:
+      # This environment variable overrides appsettings.json for the connection string
+      # Note: 'db' is the hostname for the SQL Server container within the Docker network
+      ConnectionStrings__DefaultConnection: "Server=db,1433;Database=TodoDb;User Id=sa;Password=P@ssword1;TrustServerCertificate=True;"
+    restart: always
+
+# Define named volume for data persistence
+volumes:
+  sqlserver_data:
