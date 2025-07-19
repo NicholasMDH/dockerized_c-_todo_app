@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kHaLJ9xfHPYWNyFfzWczI4hspD+9YrsbWAdt/uij0ezgBVFM6S7EI/VdJm1E7R/ZIUOlhgNol4dHa2g8rfoWDQ==",
+  "dgSpecHash": "GXfHbjhPTuU=",
   "success": true,
-  "projectFilePath": "/home/nicholas/Projects/DataAnnotation/current_submission/MyToDoAPI/MyToDoAPI.csproj",
+  "projectFilePath": "/home/nicholas/Projects/programming/learning_c#/dockerized_c#_todo_app/MyToDoAPI/MyToDoAPI.csproj",
   "expectedPackageFiles": [
     "/home/nicholas/.nuget/packages/azure.core/1.38.0/azure.core.1.38.0.nupkg.sha512",
     "/home/nicholas/.nuget/packages/azure.identity/1.11.4/azure.identity.1.11.4.nupkg.sha512",
@@ -45,7 +45,10 @@
     "/home/nicholas/.nuget/packages/system.security.cryptography.protecteddata/8.0.0/system.security.cryptography.protecteddata.8.0.0.nupkg.sha512",
     "/home/nicholas/.nuget/packages/system.text.encodings.web/4.7.2/system.text.encodings.web.4.7.2.nupkg.sha512",
     "/home/nicholas/.nuget/packages/system.text.json/4.7.2/system.text.json.4.7.2.nupkg.sha512",
-    "/home/nicholas/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+    "/home/nicholas/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
+    "/home/nicholas/.nuget/packages/microsoft.netcore.app.ref/8.0.15/microsoft.netcore.app.ref.8.0.15.nupkg.sha512",
+    "/home/nicholas/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.15/microsoft.aspnetcore.app.ref.8.0.15.nupkg.sha512",
+    "/home/nicholas/.nuget/packages/microsoft.netcore.app.host.linux-x64/8.0.15/microsoft.netcore.app.host.linux-x64.8.0.15.nupkg.sha512"
   ],
   "logs": []
 }

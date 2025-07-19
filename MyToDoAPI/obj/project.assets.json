@@ -2142,11 +2142,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/nicholas/Projects/DataAnnotation/current_submission/MyToDoAPI/MyToDoAPI.csproj",
+      "projectUniqueName": "/home/nicholas/Projects/programming/learning_c#/dockerized_c#_todo_app/MyToDoAPI/MyToDoAPI.csproj",
       "projectName": "MyToDoAPI",
-      "projectPath": "/home/nicholas/Projects/DataAnnotation/current_submission/MyToDoAPI/MyToDoAPI.csproj",
+      "projectPath": "/home/nicholas/Projects/programming/learning_c#/dockerized_c#_todo_app/MyToDoAPI/MyToDoAPI.csproj",
       "packagesPath": "/home/nicholas/.nuget/packages/",
-      "outputPath": "/home/nicholas/Projects/DataAnnotation/current_submission/MyToDoAPI/obj/",
+      "outputPath": "/home/nicholas/Projects/programming/learning_c#/dockerized_c#_todo_app/MyToDoAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/nicholas/.nuget/NuGet/NuGet.Config"
@@ -2167,7 +2167,13 @@
         "warnAsError": [
           "NU1605"
         ]
-      }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -2197,6 +2203,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.15, 8.0.15]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.linux-x64",
+            "version": "[8.0.15, 8.0.15]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.15, 8.0.15]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -2205,7 +2225,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.117/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
