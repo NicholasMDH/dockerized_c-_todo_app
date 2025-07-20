@@ -1,6 +1,8 @@
 using MyToDoAPI.Models;
 using MyToDoAPI.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 var app = builder.Build();
 
 // Fix HTTPS redirection in the future, it's a docker issue

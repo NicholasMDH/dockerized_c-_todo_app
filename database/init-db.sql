@@ -66,7 +66,7 @@ BEGIN
 END
 GO
 
--- GET /todos/{id} - Get a todo by Id
+-- GET /Todos/{id} - Get a todo by Id
 CREATE OR ALTER PROCEDURE sp_GetTodoById
     @Id INT
 AS

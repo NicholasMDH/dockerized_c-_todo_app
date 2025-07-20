@@ -1,1 +1,6 @@
-MyToDoAPI/obj/
+# Build outputs
+**/bin/
+**/obj/
+
+# Environment files
+appsettings.Development.json
