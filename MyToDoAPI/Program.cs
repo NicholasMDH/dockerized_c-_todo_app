@@ -1,3 +1,5 @@
+using MyToDoAPI.Models;
+using MyToDoAPI.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
@@ -20,7 +22,7 @@ app.MapGet("/todos/{id}", (int id) =>
     //get a specific Todo by id from the database
 });
 
-app.MapPut("/todos/{id}", (int id) =>
+app.MapPut("/todos/{id}", (int id, Todo updatedTodo) =>
 {
     //update a specific Todo by id in the database
 });

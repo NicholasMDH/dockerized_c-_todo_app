@@ -32,3 +32,85 @@ BEGIN
         ('Setup Docker', 'Configure Docker containers for the application', 1, NULL);
 END
 GO
+
+-- =====================================================
+-- STORED PROCEDURES
+-- =====================================================
+
+-- GET /todos - Get all todos
+CREATE OR ALTER PROCEDURE sp_GetAllTodos
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT Id, Title, Description, IsCompleted, DueDate
+    FROM Todos ORDER BY Id;
+END
+GO
+
+-- POST /todos - Create a new todo
+CREATE OR ALTER PROCEDURE sp_CreateTodo
+    @Title NVARCHAR(255),
+    @Description NVARCHAR(1000) = NULL,
+    @IsCompleted BIT,
+    @DueDate DATETIME2 = NULL,
+    @NewId INT OUTPUT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO Todos (Title, Description, IsCompleted, DueDate)
+    VALUES (@Title, @Description, @IsCompleted, @DueDate);
+
+    SET @NewId = SCOPE_IDENTITY();
+END
+GO
+
+-- GET /todos/{id} - Get a todo by Id
+CREATE OR ALTER PROCEDURE sp_GetTodoById
+    @Id INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT Id, Title, Description, IsCompleted, DueDate
+    FROM Todos
+    WHERE Id = @Id;
+END
+GO
+
+-- PUT /todos/{id} - Update a todo by Id
+CREATE OR ALTER PROCEDURE sp_UpdateTodoById
+    @Id INT ,
+    @Title NVARCHAR(255),
+    @Description NVARCHAR(1000) = NULL,
+    @IsCompleted BIT,
+    @DueDate DATETIME2 = NULL,
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE Todos
+    SET Title = @Title,
+        Description = @Description,
+        IsCompleted = @IsCompleted,
+        DueDate = @DueDate
+    WHERE Id = @Id;
+
+    SELECT @@ROWCOUNT AS RowsAffected;
+END
+GO
+
+-- DELETE /todos/{id}
+CREATE OR ALTER PROCEDURE sp_DeleteTodoById
+    @Id INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM Todos
+    WHERE Id = @Id;
+
+    SELECT @@ROWCOUNT AS RowsAffected;
+END
+GO
