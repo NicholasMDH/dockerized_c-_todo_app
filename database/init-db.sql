@@ -85,7 +85,7 @@ CREATE OR ALTER PROCEDURE sp_UpdateTodoById
     @Title NVARCHAR(255),
     @Description NVARCHAR(1000) = NULL,
     @IsCompleted BIT,
-    @DueDate DATETIME2 = NULL,
+    @DueDate DATETIME2 = NULL
 AS
 BEGIN
     SET NOCOUNT ON;

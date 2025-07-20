@@ -80,7 +80,7 @@ namespace MyToDoAPI.Repositories
         public async Task<Todo?> GetTodoByIdAsync(int id)
         {
             using var connection = new SqlConnection(_connectionString);
-            using var command = new SqlCommand("sp_GetTodoByIdAsync", connection)
+            using var command = new SqlCommand("sp_GetTodoById", connection)
             {
                 CommandType = CommandType.StoredProcedure
             };

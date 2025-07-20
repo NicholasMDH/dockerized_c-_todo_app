@@ -12,7 +12,6 @@ services:
     ports:
       - "1433:1433" # Map host port 1433 to container port 1433 for external access (e.g., Azure Data Studio)
     volumes:
-      - sqlserver_data:/var/opt/mssql # Persist database data
       - ./database/init-db.sql:/init-db.sql:ro # Mount the SQL script
       - ./database/init-db.sh:/init-db.sh:ro # Mount the bash script
     restart: always
@@ -38,6 +37,8 @@ services:
     container_name: todoapi_app
     ports:
       - "8080:80" # Map host port 8080 to container port 80 (where ASP.NET Core listens by default)
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db,1433;Database=TodoDb;User Id=sa;Password=P@ssword1;TrustServerCertificate=True;
     depends_on:
       db:
         condition: service_healthy # Wait for the DB to be healthy
@@ -46,7 +47,3 @@ services:
       # Note: 'db' is the hostname for the SQL Server container within the Docker network
       ConnectionStrings__DefaultConnection: "Server=db,1433;Database=TodoDb;User Id=sa;Password=P@ssword1;TrustServerCertificate=True;"
     restart: always
-
-# Define named volume for data persistence
-volumes:
-  sqlserver_data:

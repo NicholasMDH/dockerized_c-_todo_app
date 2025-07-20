@@ -8,31 +8,44 @@ var app = builder.Build();
 // Fix HTTPS redirection in the future, it's a docker issue
 // app.UseHttpsRedirection();
 
+// ----------------------------------------
 // Routes
-app.MapGet("/todos", () =>
+// ----------------------------------------
+
+//get all Todos from the database
+app.MapGet("/todos", async (ITodoRepository repository) =>
 {
-    //get all Todos from the database
+    var todos = await repository.GetAllTodosAsync();
+    return Results.Ok(todos);
 });
 
-app.MapPost("/todos", () =>
+//create a new Todo in the database
+app.MapPost("/todos", async (ITodoRepository repository, Todo newTodo) =>
 {
-    //create a new Todo in the database
+    var createdTodoId = await repository.CreateTodoAsync(newTodo);
+    var createdTodo = await repository.GetTodoByIdAsync(createdTodoId);
+    return Results.Created($"/todos/{createdTodoId}", createdTodo);
 });
 
-app.MapGet("/todos/{id}", (int id) =>
+//get a specific Todo by id from the database
+app.MapGet("/todos/{id}", async (ITodoRepository repository, int id) =>
 {
-    //get a specific Todo by id from the database
+    var returnedTodo = await repository.GetTodoByIdAsync(id);
+    return returnedTodo is not null ? Results.Ok(returnedTodo) : Results.NotFound();
 });
 
-app.MapPut("/todos/{id}", (int id, Todo updatedTodo) =>
+//update a specific Todo by id in the database
+app.MapPut("/todos/{id}", async (ITodoRepository repository, int id, Todo updatedTodo) =>
 {
-    //update a specific Todo by id in the database
+    var wasUpdated = await repository.UpdateTodoByIdAsync(id, updatedTodo);
+    return wasUpdated ? Results.NoContent() : Results.NotFound();
 });
 
-app.MapDelete("/todos/{id}", (int id) =>
+//delete a specific Todo by id from the database
+app.MapDelete("/todos/{id}", async (ITodoRepository repository, int id) =>
 {
-    //delete a specific Todo by id from the database
+    var wasDeleted = await repository.DeleteTodoByIdAsync(id);
+    return wasDeleted ? Results.NoContent() : Results.NotFound();
 });
-
 
 app.Run();

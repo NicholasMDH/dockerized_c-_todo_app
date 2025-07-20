@@ -3,9 +3,8 @@
 - I am using copilot to help me learn and understand the language, and will not be focusing on security initially.
 
 # Goals:
-- Get basic API + DB functional (including setup script)
-    - Just basic GET/POST/DELETE for each TODO item
-- Add filtering for TODO items
+- Get basic API + DB functional (including setup script) - DONE!
 - Build a test framework
 - Build a basic frontend
+    - Add filtering for TODO items
 - Security overhaul?
