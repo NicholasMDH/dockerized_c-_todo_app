@@ -4,6 +4,8 @@
 
 # Goals:
 - Get basic API + DB functional (including setup script)
+    - Just basic GET/POST/DELETE for each TODO item
+- Add filtering for TODO items
 - Build a test framework
 - Build a basic frontend
 - Security overhaul?
