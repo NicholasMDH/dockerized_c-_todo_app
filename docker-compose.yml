@@ -13,13 +13,22 @@ services:
       - "1433:1433" # Map host port 1433 to container port 1433 for external access (e.g., Azure Data Studio)
     volumes:
       - sqlserver_data:/var/opt/mssql # Persist database data
+      - ./database/init-db.sql:/init-db.sql:ro # Mount the SQL script
+      - ./database/init-db.sh:/init-db.sh:ro # Mount the bash script
     restart: always
+    command: >
+      bash -c "
+      /opt/mssql/bin/sqlservr &
+      sleep 30 &&
+      /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P P@ssword1 -C -i /init-db.sql &&
+      wait
+      "
     healthcheck: # Check if SQL Server is ready
       test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P P@ssword1 -C -Q 'SELECT 1;'"]
       interval: 5s
       timeout: 5s
       retries: 10
-      start_period: 30s # Give it time to start initially
+      start_period: 60s # Give it more time since we're running init script
 
   # ASP.NET Core API Service
   api:
